@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img {
+            transition: all .1s;
+        }
+        #imgwrap{
+            overflow: hidden;
+            height: 300px;
+            width: 300px;
+        }
+        #wenzi{
+            background-color: red;
+            transition: all .1s;
+        }
+    </style>
+</head>
+<body>
+<div id="imgwrap">
+    <img id="img" src="./QQ20170925-132343@2x.png" style="width: 300px;height: 300px">
+</div>
+<div id="wenzi">
+    <pre>
+            dnhjkdbndjkbdj
+            dmkdn
+            dmkdnkd
+            ndkjndd
+            mdknmdk
+            dnjjkndd
+            dknmdkd
+            mdkndd
+            dnjd
+    </pre>
+</div>
+</body>
+<script>
+    window.onload = function () {
+        var wenzi = document.getElementById("wenzi");
+        var imgwrap = document.getElementById("imgwrap");
+        var img = document.getElementById("img");
+        var starty = "";
+        var movey = "";
+        wenzi.ontouchstart = function (e) {
+            starty = e.changedTouches[0].clientY
+        }
+        wenzi.ontouchend=function (e) {
+            img.style.transform = "scale(1)";
+            imgwrap.style.height = img.style.height;
+        }
+        wenzi.ontouchmove = function (e) {
+            movey = e.changedTouches[0].clientY;
+            var scale = 1 + (movey - starty) / 200;
+            if (scale < 1 || scale >1.3) {
+                return
+            }
+            img.style.transform = "scale(" + scale + ")";
+            imgwrap.style.height = img.getBoundingClientRect().height +"px";
+        }
+    }
+</script>
+</html>
